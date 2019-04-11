@@ -19,11 +19,25 @@ public class Sequence extends ArrayList<Integer> {
     b = new Sequence(); 
     result = a.merge(b); 
     System.out.println( "merge(" + a + ", " + b + ") = " + result ); 
+    
+    a = new Sequence( new int[] { 1, 3, 5, 7, 9 } ); 
+    b = new Sequence( new int[] { 2, 4, 6, 8, 10 } ); 
+    result = a.merge(b); 
   }
-  // if a and b are sortted the result is also sorted 
+  // if a and b are sorted the result is also sorted 
   public Sequence merge(Sequence other) {
     if (this.size() == 0) return other; 
     else if (other.size() == 0) return this; 
-    else return null; 
+    else {
+      Sequence result = new Sequence(); 
+      for (int me = 0, them = 0; me < this.size() || them < other.size() ;     ) {
+        if (this.get(me) < other.get(them)) 
+          result.add(this.get(me++)); 
+        else 
+          result.add(other.get(them++));          
+        System.out.println( result ); 
+      }
+      return result; 
+    }
   }
 }
